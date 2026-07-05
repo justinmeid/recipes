@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if title %}{{ title }} · {% endif %}Our Recipes</title>
+    <link rel="stylesheet" href="{{ '/assets/style.css' | url }}" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="{{ '/' | url }}">🍳 Our Recipes</a>
+      <nav>
+        <a href="{{ '/' | url }}">Recipes</a>
+        <a href="{{ '/shopping-list/' | url }}">Shopping List</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      {{ content | safe }}
+    </main>
+  </body>
+</html>

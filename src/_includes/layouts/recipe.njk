@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+---
+<article class="recipe">
+  <a class="back-link" href="{{ '/' | url }}">← All recipes</a>
+
+  <h1>{{ title }}</h1>
+
+  <ul class="recipe-meta">
+    {% if servings %}<li>🍽️ Serves {{ servings }}</li>{% endif %}
+    {% if prep %}<li>🔪 Prep {{ prep }}</li>{% endif %}
+    {% if cook %}<li>🔥 Cook {{ cook }}</li>{% endif %}
+    {% if health %}
+    <li class="health" title="{{ health_note }}">
+      💚 Health
+      <span class="health-dots" aria-hidden="true">{% for i in [1,2,3,4,5] %}<span class="dot {% if i <= health %}on{% endif %}"></span>{% endfor %}</span>
+      <span class="health-num">{{ health }}/5</span>
+    </li>
+    {% endif %}
+  </ul>
+
+  {% if source %}<p class="recipe-source">Adapted from {{ source }}</p>{% endif %}
+
+  <div class="recipe-body">
+    <section class="ingredients">
+      <h2>Ingredients</h2>
+      <ul>
+        {% for ing in ingredients %}
+        <li>
+          {% if ing.qty is not none %}<strong>{{ ing.qty }}{% if ing.unit %} {{ ing.unit }}{% endif %}</strong> {% endif %}{{ ing.item }}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="instructions">
+      {{ content | safe }}
+    </section>
+  </div>
+
+  {% if macros %}
+  <section class="macros">
+    <h2>Nutrition <span class="macros-sub">estimated · per serving</span></h2>
+    <div class="macro-grid">
+      {% if macros.calories %}<div class="macro"><span class="macro-value">{{ macros.calories }}</span><span class="macro-label">calories</span></div>{% endif %}
+      {% if macros.protein %}<div class="macro"><span class="macro-value">{{ macros.protein }}g</span><span class="macro-label">protein</span></div>{% endif %}
+      {% if macros.carbs %}<div class="macro"><span class="macro-value">{{ macros.carbs }}g</span><span class="macro-label">carbs</span></div>{% endif %}
+      {% if macros.fat %}<div class="macro"><span class="macro-value">{{ macros.fat }}g</span><span class="macro-label">fat</span></div>{% endif %}
+      {% if macros.fiber %}<div class="macro"><span class="macro-value">{{ macros.fiber }}g</span><span class="macro-label">fiber</span></div>{% endif %}
+    </div>
+    {% if health_note %}<p class="health-note">{{ health_note }}</p>{% endif %}
+  </section>
+  {% endif %}
+</article>

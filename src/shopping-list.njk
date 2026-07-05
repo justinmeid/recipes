@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+title: Shopping List
+permalink: /shopping-list/
+---
+<section class="hero">
+  <h1>Shopping List</h1>
+  <p>Pick the recipes you're cooking, adjust the servings, and we'll combine
+     everything you need into one list.</p>
+</section>
+
+<div class="shopping-app"
+     data-recipes-url="{{ '/recipes.json' | url }}"
+     data-loading="Loading recipes…">
+  <p class="loading">Loading recipes…</p>
+</div>
+
+<template id="tpl-recipe-picker">
+  <label class="picker-row">
+    <input type="checkbox" class="picker-check" />
+    <span class="picker-title"></span>
+    <span class="picker-scale" hidden>
+      <span class="picker-servings-label">Serves</span>
+      <input type="number" class="picker-servings" min="1" step="1" />
+    </span>
+  </label>
+</template>
+
+<script src="{{ '/assets/shopping-list.js' | url }}"></script>

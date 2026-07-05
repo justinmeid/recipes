@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: Our Recipes
+---
+<section class="hero">
+  <h1>Our Recipes</h1>
+  <p>Our favorite recipes, cleaned up and easy to read. Pick a few and build a
+     <a href="{{ '/shopping-list/' | url }}">shopping list</a>.</p>
+</section>
+
+<ul class="recipe-grid">
+  {% for recipe in collections.recipes %}
+  <li class="recipe-card">
+    <a href="{{ recipe.url | url }}">
+      <h2>{{ recipe.data.title }}</h2>
+      <p class="recipe-card-meta">
+        {% if recipe.data.servings %}Serves {{ recipe.data.servings }}{% endif %}
+        {% if recipe.data.macros.calories %} · {{ recipe.data.macros.calories }} cal{% endif %}
+        {% if recipe.data.health %} · Health {{ recipe.data.health }}/5{% endif %}
+      </p>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,26 @@
+---
+permalink: /recipes.json
+eleventyExcludeFromCollections: true
+---
+{%- set recipeList = [] -%}
+[
+{%- for recipe in collections.recipes -%}
+  {
+    "slug": {{ recipe.data.slug | dump | safe }},
+    "title": {{ recipe.data.title | dump | safe }},
+    "servings": {{ recipe.data.servings | default(1) }},
+    "time": {{ (recipe.data.time or "") | dump | safe }},
+    "url": {{ (recipe.url | url) | dump | safe }},
+    "tags": {{ (recipe.data.tags or []) | dump | safe }},
+    "ingredients": [
+      {%- for ing in recipe.data.ingredients -%}
+      {
+        "qty": {% if ing.qty is none %}null{% else %}{{ ing.qty }}{% endif %},
+        "unit": {{ (ing.unit or "") | dump | safe }},
+        "item": {{ ing.item | dump | safe }}
+      }{% if not loop.last %},{% endif %}
+      {%- endfor -%}
+    ]
+  }{% if not loop.last %},{% endif %}
+{%- endfor -%}
+]
